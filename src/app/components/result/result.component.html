@@ -1,0 +1,8 @@
+<div class="flex flex-col gap-2">
+  <p>Ваше прохождение равно : {{(this.resultService.trueAnswerCounter / this.resultService.questionCounter) * 100 +
+    '%'}} </p>
+  <span>Правильный ответов : {{this.resultService.trueAnswerCounter}}</span>
+  <span>Неправильных ответов : {{this.resultService.falseAnswerCounter}}</span>
+  <button class="border rounded-md outline-black transition-all ease-in-out hover:bg-orange-400 hover:text-white"
+    (click)="reloadPage()">Попробовать еще раз</button>
+</div>

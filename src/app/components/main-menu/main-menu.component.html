@@ -1,0 +1,16 @@
+<div *ngFor="let question of [questionArr[currentIndex]]" class="flex flex-col justify-center items-center">
+  <p class="text-2xl text-center">{{question.name}}</p>
+  <div *ngFor="let answer of questionArr[currentIndex].possibleAnswers" [ngClass]="{
+    'bg-green-500': answer.selected && answer.isAnswer,
+    'bg-red-500': answer.selected && !answer.isAnswer,
+    '': !answer.selected
+  }" class="flex flex-col items-center justify-center gap-2 mt-5">
+    <div (click)="!answerSelected && checkedAnswer(answer)" [class.cursor-pointer]="!answerSelected"
+      [class.cursor-not-allowed]="answerSelected" class="shadow w-[350px] hover:opacity-35 pl-2">{{answer.text}}
+    </div>
+  </div>
+  <button *ngIf="answerSelected"
+    [ngClass]="endTest ? 'hidden' : 'mt-5 text-xl w-[300px] border rounded-md outline-black transition-all ease-in-out hover:bg-orange-400 hover:text-white'"
+    (click)="nextQuestion()">Далее</button>
+  <button (click)="endTesting()" [ngClass]="endTest ? 'mt-5 text-xl' : 'hidden'">Завершить тест</button>
+</div>
