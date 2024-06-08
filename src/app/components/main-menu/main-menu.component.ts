@@ -6,7 +6,6 @@ import { questions } from 'src/app/constants/questionsData';
 import { PossibleAnswer } from 'src/app/models/answer.model';
 import { ResultService } from 'src/app/services/result.service';
 
-
 @Component({
   selector: 'app-main-menu',
   standalone: true,
@@ -72,6 +71,7 @@ export class MainMenuComponent implements OnInit {
       this.resultService.incrementTrueAnswer();
     }
     this.answerSelected = true;
+
     setTimeout(() => {
       window.scrollTo({
         top: document.documentElement.scrollHeight,
@@ -79,8 +79,6 @@ export class MainMenuComponent implements OnInit {
       });
     }, 100);
   }
-
-
 
   endTesting() {
     this.isEnd.emit();
