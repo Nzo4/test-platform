@@ -1,10 +1,12 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { CommonModule, ViewportScroller } from '@angular/common';
 import { Question } from 'src/app/models/question.model';
 import { questions } from 'src/app/constants/questionsData';
 import { PossibleAnswer } from 'src/app/models/answer.model';
 import { ResultService } from 'src/app/services/result.service';
+
+
 @Component({
   selector: 'app-main-menu',
   standalone: true,
@@ -13,7 +15,7 @@ import { ResultService } from 'src/app/services/result.service';
   imports: [ReactiveFormsModule, CommonModule]
 })
 export class MainMenuComponent implements OnInit {
-  constructor(private resultService: ResultService) { }
+  constructor(private resultService: ResultService, private scroller: ViewportScroller) { }
 
   @Output() isEnd = new EventEmitter<boolean>();
   questionArr!: Question[];
@@ -21,10 +23,12 @@ export class MainMenuComponent implements OnInit {
   endTest: boolean = false;
   currentAnswer = false;
   answerSelected: boolean = false;
+  screenHeight!: number;
 
   ngOnInit(): void {
     this.questionArr = this.shuffleArray(questions);
     this.resultService.questionCounter = this.questionArr.length;
+    this.screenHeight = window.innerHeight;
   };
   nextQuestion() {
     if (this.currentIndex < this.questionArr.length - 1) {
@@ -68,7 +72,14 @@ export class MainMenuComponent implements OnInit {
       this.resultService.incrementTrueAnswer();
     }
     this.answerSelected = true;
+    setTimeout(() => {
+      window.scrollTo({
+        top: document.documentElement.scrollHeight,
+        behavior: 'smooth'
+      });
+    }, 100);
   }
+
 
 
   endTesting() {
