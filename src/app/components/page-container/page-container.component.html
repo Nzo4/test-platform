@@ -1,6 +1,0 @@
-<div class="container mx-auto px-4 h-auto">
-  <app-start-menu [ngClass]="isVisible || isVisible === null ? 'hidden': '' "
-    (isVisible)="changeVisibilityTest($event)" />
-  <app-main-menu [ngClass]="isVisible ? '': 'hidden' " (isEnd)="changeVisibilityEnd($event)" />
-  <app-result [ngClass]="isEnd ? '' : 'hidden'" />
-</div>

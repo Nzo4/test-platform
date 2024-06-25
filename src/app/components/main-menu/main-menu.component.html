@@ -1,5 +1,5 @@
-<div *ngFor="let question of [questionArr.slice(0,50)[currentIndex]]" class="mt-3">
-  <span class="text-sm text-start text-gray-400">Вопрос : {{currentIndex }} / 50</span>
+<div *ngFor="let question of [questionArr.slice(0,questionLength)[currentIndex]]" class="mt-3">
+  <span class="text-sm text-start text-gray-400">Вопрос : {{currentIndex }} / {{questionLength}}</span>
   <p class="text-xl text-start">{{question.name}}</p>
   <div *ngFor="let answer of questionArr[currentIndex].possibleAnswers" [ngClass]="{
     'bg-green-500 text-white': answer.selected && answer.isAnswer,

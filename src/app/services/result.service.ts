@@ -17,4 +17,10 @@ export class ResultService {
     this.falseAnswerCounter += 1;
   }
 
+  refresh() {
+    this.trueAnswerCounter = 0;
+    this.falseAnswerCounter = 0;
+    this.questionCounter = 0;
+  }
+
 }

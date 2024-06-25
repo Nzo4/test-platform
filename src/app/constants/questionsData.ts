@@ -1,6 +1,6 @@
 import { Question } from "../models/question.model";
 
-export const questions: Question[] = [
+export const biot: Question[] = [
   {
     name: 'Кем создается комиссия по расследованию групповых несчастных случаев, при гибели более пяти человек?',
     possibleAnswers: [

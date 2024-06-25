@@ -1,0 +1,10 @@
+<div class="container mx-auto px-4 h-auto">
+  <div class="flex flex-col justify-center items-center mt-5 gap-5">
+    <h1 class="text-2xl">Выберите тест</h1>
+    <div [routerLink]="page.path"
+      class="w-52 h-52 border border-gray-200 rounded-md  select-none cursor-pointer	flex u justify-center items-center "
+      *ngFor="let page of routes">
+      <span class="text-xl">{{page.title}}</span>
+    </div>
+  </div>
+</div>

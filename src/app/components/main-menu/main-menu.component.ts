@@ -2,9 +2,10 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule, ViewportScroller } from '@angular/common';
 import { Question } from 'src/app/models/question.model';
-import { questions } from 'src/app/constants/questionsData';
 import { PossibleAnswer } from 'src/app/models/answer.model';
 import { ResultService } from 'src/app/services/result.service';
+import { TestingService } from 'src/app/services/testing.service';
+import { NavigationStart, Router } from '@angular/router';
 
 @Component({
   selector: 'app-main-menu',
@@ -14,21 +15,29 @@ import { ResultService } from 'src/app/services/result.service';
   imports: [ReactiveFormsModule, CommonModule]
 })
 export class MainMenuComponent implements OnInit {
-  constructor(private resultService: ResultService, private scroller: ViewportScroller) { }
+  constructor(
+    private resultService: ResultService,
+    private testingService: TestingService,
+    private router: Router,
+  ) { }
 
   @Output() isEnd = new EventEmitter<boolean>();
   questionArr!: Question[];
-  currentIndex: number = 0;
+  currentIndex: number = 1;
+  questionLength: number = 0;
   endTest: boolean = false;
   currentAnswer = false;
   answerSelected: boolean = false;
   screenHeight!: number;
 
   ngOnInit(): void {
-    this.questionArr = this.shuffleArray(questions);
-    this.resultService.questionCounter = this.questionArr.length;
-    this.screenHeight = window.innerHeight;
+    this.questionLength = this.testingService.questionsLength;
+    this.questionArr = this.testingService.questionArr;
+    if (this.questionArr === undefined) {
+      this.router.navigate(['']);
+    }
   };
+
   nextQuestion() {
     if (this.currentIndex < this.questionArr.length - 1) {
       this.currentIndex++;
@@ -36,19 +45,6 @@ export class MainMenuComponent implements OnInit {
     } else {
       this.endTest = true;
     }
-  }
-
-  shuffleArray(arr: Question[]) {
-    for (let i = arr.length - 1; i > 0; i -= 1) {
-      let j = Math.floor(Math.random() * (i + 1));
-      this.shuffleAnswers(arr[j]);
-      [arr[i], arr[j]] = [arr[j], arr[i]];
-    }
-    return arr;
-  }
-
-  shuffleAnswers(question: Question) {
-    return question.possibleAnswers.sort(() => Math.random() - 0.5);
   }
 
   checkedAnswer(answer: PossibleAnswer) {
@@ -81,12 +77,6 @@ export class MainMenuComponent implements OnInit {
   }
 
   endTesting() {
-    this.isEnd.emit();
+    this.router.navigate(['result'])
   }
-
-
-
-
-
-
 }
