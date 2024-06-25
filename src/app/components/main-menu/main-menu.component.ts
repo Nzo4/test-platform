@@ -23,7 +23,7 @@ export class MainMenuComponent implements OnInit {
 
   @Output() isEnd = new EventEmitter<boolean>();
   questionArr!: Question[];
-  currentIndex: number = 1;
+  currentIndex: number = 0;
   questionLength: number = 0;
   endTest: boolean = false;
   currentAnswer = false;
@@ -39,7 +39,7 @@ export class MainMenuComponent implements OnInit {
   };
 
   nextQuestion() {
-    if (this.currentIndex < this.questionArr.length - 1) {
+    if (this.currentIndex < this.questionLength) {
       this.currentIndex++;
       this.answerSelected = false;
     } else {
