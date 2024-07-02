@@ -1,3 +1,10 @@
+<style>
+  input[type="radio"]:checked+span {
+    background-color: #fff;
+    font-weight: 600;
+  }
+</style>
+
 <div class="container mx-auto px-4 h-auto">
   <div class="flex flex-col justify-center items-center mt-5 gap-5">
     <h1 class="text-2xl">Выберите тест</h1>
@@ -6,5 +13,21 @@
       *ngFor="let page of routes">
       <span class="text-xl">{{page.title}}</span>
     </div>
+    <span>Режим тестов:</span>
+    <div
+      class="relative flex flex-wrap rounded-[0.5rem] bg-[#eee] box-border shadow-black p-[0.25rem] w-[300px] text-[14px]">
+      <label class="flex-1 text-center">
+        <input (click)="minQuestion()" [checked]="!this.testingService.isMax" class="hidden" type="radio" name="radio">
+        <span
+          class="flex cursor-pointer items-center justify-center rounded-[0.5rem] p-[0.5rem] color-[#f6f6f6] transition-all 0.15s ease-in-out">Обычный</span>
+      </label>
+      <label class="flex-1 text-center">
+        <input [checked]="this.testingService.isMax" (click)="maxQuestion()" class="hidden" type="radio" name="radio">
+        <span
+          class="flex cursor-pointer items-center justify-center rounded-[0.5rem] p-[0.5rem] color-[#f6f6f6] transition-all 0.15s ease-in-out">Максимальный</span>
+      </label>
+    </div>
   </div>
+
+
 </div>

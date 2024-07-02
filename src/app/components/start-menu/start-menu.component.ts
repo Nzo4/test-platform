@@ -37,14 +37,25 @@ export class StartMenuComponent {
     switch (this.router.url) {
       case '/biot': {
         this.testingService.startTest(biot);
-        this.testingService.questionsLength = 50;
-        this.resultService.refresh();
+        if (this.testingService.isMax) {
+          this.testingService.questionsLength = this.testingService.questionArr.length;
+          this.resultService.refresh();
+        } else {
+          this.testingService.questionsLength = 50;
+          this.resultService.refresh();
+        }
+
         break;
       }
       case '/ptm': {
         this.testingService.startTest(ptm);
-        this.testingService.questionsLength = 20;
-        this.resultService.refresh();
+        if (this.testingService.isMax) {
+          this.testingService.questionsLength = this.testingService.questionArr.length;
+          this.resultService.refresh();
+        } else {
+          this.testingService.questionsLength = 20;
+          this.resultService.refresh();
+        }
         break;
       }
     }

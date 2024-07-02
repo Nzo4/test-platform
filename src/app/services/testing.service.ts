@@ -10,7 +10,7 @@ export class TestingService {
   questionArr!: Question[];
   questionsLength: number = 0;
   screenHeight!: number;
-
+  isMax: boolean = false;
 
   constructor(private resultService: ResultService, private router: Router) { }
 
@@ -31,5 +31,12 @@ export class TestingService {
 
   shuffleAnswers(question: Question) {
     return question.possibleAnswers.sort(() => Math.random() - 0.5);
+  }
+
+  changeMaxQuestion() {
+    this.isMax = true;
+  }
+  changeNormalQuestion() {
+    this.isMax = false;
   }
 }
