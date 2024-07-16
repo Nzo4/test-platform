@@ -1,11 +1,11 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { CommonModule, ViewportScroller } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Question } from 'src/app/models/question.model';
 import { PossibleAnswer } from 'src/app/models/answer.model';
 import { ResultService } from 'src/app/services/result.service';
 import { TestingService } from 'src/app/services/testing.service';
-import { NavigationStart, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main-menu',
